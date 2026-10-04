@@ -7,7 +7,7 @@
 
 ## 📌 Product Overview
 
-**Aegis** is an automated, pre-deployment testing simulator (LLMOps) designed specifically for enterprise Voice AI agencies. Before deploying a voice agent to a real client, Aegis generates synthetic callers (using LLM personas like "angry customer", "scammer", or "confused caller") to interact with the target agent. It uses an automated "LLM-as-a-Judge" system to score the target agent on task completion, hallucination rates, and strict guardrail violations. 
+**Aegis** is an automated, pre-deployment testing simulator (LLMOps) designed specifically for enterprise Voice AI agencies. Before deploying a voice agent to a real client, Aegis generates synthetic callers (using LLM personas like "angry customer", "scammer", or "confused caller") to interact with the target agent. It uses an automated "LLM-as-a-Judge" system to score the target agent on task completion, hallucination rates, and strict guardrail violations.
 
 The full open-source target stack utilizes LangGraph for multi-agent adversarial orchestration, Llama-3 8B (hosted locally) to generate the synthetic personas and judge outputs, FastAPI for the backend evaluation engine, and Coqui TTS / Whisper STT to simulate real-time voice latency and audio interference during regression testing.
 
@@ -76,6 +76,7 @@ The current working MVP validates the multi-agent testing concept with a lightwe
 - **Evaluation Dashboard**: Dark-mode report card with circular SVG score gauge, violation badges, and behavioral breakdown.
 
 ### Tech Stack (MVP)
+
 - **Frontend / Dashboard**: Streamlit (Python) with custom CSS & dark mode
 - **LLM Engine**: OpenAI API (`gpt-4o-mini` for conversational agents, `gpt-4o` for evaluation)
 - **Dependencies**: Only `streamlit>=1.38.0` and `openai>=1.40.0`
@@ -85,7 +86,7 @@ The current working MVP validates the multi-agent testing concept with a lightwe
 ## 🎭 Adversarial Personas (Included in MVP)
 
 | Persona | Difficulty | Attack Strategy & Failure Modes Tested |
-|---|---|---|
+| --- | --- | --- |
 | 😡 **Angry Customer** | Hard | Demands $100 refund, escalates profanity, threatens legal action to force policy violation. |
 | 👴 **Confused Elderly** | Medium | Misunderstands answers, rambles off-topic, tests agent patience and clarity. |
 | 🕵️ **Social Engineer / Hacker** | Hard | Prompt injection (`"Ignore previous instructions"`), authority impersonation, prompt extraction. |
@@ -110,6 +111,7 @@ The MVP will evolve into the full production platform through the following mile
 ## 🛠️ Quick Start (Running the MVP)
 
 ### 1. Clone & Install Dependencies
+
 ```bash
 git clone https://github.com/i220893/Aegis-Voice-Test-Lab.git
 cd Aegis-Voice-Test-Lab
@@ -117,11 +119,13 @@ pip install -r requirements.txt
 ```
 
 ### 2. Launch the Application
+
 ```bash
 streamlit run app.py
 ```
 
 ### 3. Run a Simulation
+
 1. Enter your **OpenAI API Key** in the sidebar.
 2. Select an **Adversarial Persona** and set the number of turns.
 3. Click **🚀 Run Simulation**.
