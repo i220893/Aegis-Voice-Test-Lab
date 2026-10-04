@@ -4,6 +4,7 @@ Aegis: Voice Agent Test Lab — Main Streamlit Application.
 Multi-agent adversarial simulator for testing enterprise voice AI agents.
 """
 
+import os
 import streamlit as st
 from ui.sidebar import render_sidebar
 from ui.chat_display import (
@@ -150,6 +151,16 @@ st.markdown("""
 
 
 # ──────────────────────────────────────────────
+# Secrets / Environment — API Key Fallback
+# ──────────────────────────────────────────────
+# Priority: st.secrets (Streamlit Cloud) > env var > empty (user must enter manually)
+try:
+    _default_api_key = st.secrets.get("OPENAI_API_KEY", "")
+except Exception:
+    _default_api_key = os.environ.get("OPENAI_API_KEY", "")
+
+
+# ──────────────────────────────────────────────
 # Session State Initialization
 # ──────────────────────────────────────────────
 if "simulation_running" not in st.session_state:
@@ -167,7 +178,7 @@ if "last_persona" not in st.session_state:
 # ──────────────────────────────────────────────
 # Sidebar
 # ──────────────────────────────────────────────
-config = render_sidebar()
+config = render_sidebar(default_api_key=_default_api_key)
 
 
 # ──────────────────────────────────────────────

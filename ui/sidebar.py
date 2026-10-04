@@ -8,9 +8,12 @@ import streamlit as st
 from config.personas import PERSONAS
 
 
-def render_sidebar() -> dict:
+def render_sidebar(default_api_key: str = "") -> dict:
     """
     Render the sidebar and return the current configuration.
+
+    Args:
+        default_api_key: Pre-filled API key (from st.secrets or env var on cloud deploys).
 
     Returns:
         dict with keys:
@@ -49,6 +52,7 @@ def render_sidebar() -> dict:
         api_key = st.text_input(
             "API Key",
             type="password",
+            value=default_api_key,
             placeholder="sk-...",
             label_visibility="collapsed",
             help="Your key is never stored. It's used only for this session.",
@@ -56,6 +60,9 @@ def render_sidebar() -> dict:
 
         if not api_key:
             st.warning("Enter your API key to begin.", icon="⚠️")
+        elif default_api_key and api_key == default_api_key:
+            st.success("API key loaded from server secrets.", icon="🔒")
+
 
         st.markdown("---")
 
